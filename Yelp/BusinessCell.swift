@@ -22,10 +22,14 @@ class BusinessCell: UITableViewCell {
     
     var business: Business! {
         didSet {
+            // Labels
             nameLabel.text = business.name
             distanceLabel.text = business.distance
             reviewsLabel.text = "\(business.reviewCount!) Reviews"
             categoryLabel.text = business.categories
+            addressLabel.text = business.address
+            
+            // Images
             businessImage.setImageWith(business.imageURL!)
             ratingImage.setImageWith(business.ratingImageURL!)
         }

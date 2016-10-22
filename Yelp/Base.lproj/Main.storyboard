@@ -35,7 +35,7 @@
                                                         <constraint firstAttribute="height" constant="80" id="WNd-tt-XDc"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYr-YI-18Q">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYr-YI-18Q" userLabel="Business Name Label">
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -61,7 +61,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.8mi" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hs5-Lx-5AE">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="0.8mi" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hs5-Lx-5AE">
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.40250237944162437" green="0.40250237944162437" blue="0.40250237944162437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -77,9 +77,10 @@
                                                 <constraint firstItem="dcq-lj-fdP" firstAttribute="leading" secondItem="iHT-5p-ECE" secondAttribute="leading" constant="8" id="K6g-KE-yeK"/>
                                                 <constraint firstItem="6eK-UT-FON" firstAttribute="leading" secondItem="dcq-lj-fdP" secondAttribute="trailing" constant="6" id="PsQ-Il-GoF"/>
                                                 <constraint firstItem="LD0-j5-7Ed" firstAttribute="top" secondItem="OIS-TA-409" secondAttribute="bottom" constant="2.5" id="U87-xM-wgQ"/>
+                                                <constraint firstItem="Hs5-Lx-5AE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BYr-YI-18Q" secondAttribute="trailing" constant="8" id="WSp-Lo-fbk"/>
                                                 <constraint firstItem="OIS-TA-409" firstAttribute="top" secondItem="6eK-UT-FON" secondAttribute="bottom" constant="10" id="efF-VR-nqK"/>
                                                 <constraint firstItem="dcq-lj-fdP" firstAttribute="top" secondItem="iHT-5p-ECE" secondAttribute="top" constant="7.5" id="gOW-jQ-ELw"/>
-                                                <constraint firstItem="Hs5-Lx-5AE" firstAttribute="top" secondItem="iHT-5p-ECE" secondAttribute="topMargin" id="m1W-Re-4i4"/>
+                                                <constraint firstItem="Hs5-Lx-5AE" firstAttribute="top" secondItem="iHT-5p-ECE" secondAttribute="topMargin" constant="2" id="m1W-Re-4i4"/>
                                                 <constraint firstItem="Hs5-Lx-5AE" firstAttribute="trailing" secondItem="iHT-5p-ECE" secondAttribute="trailingMargin" id="mfb-6K-dRI"/>
                                                 <constraint firstAttribute="bottom" secondItem="LD0-j5-7Ed" secondAttribute="bottom" constant="3" id="pgn-kI-O6I"/>
                                                 <constraint firstItem="tYL-UD-Sq5" firstAttribute="leading" secondItem="6eK-UT-FON" secondAttribute="trailing" constant="8" id="sqJ-I1-U9F"/>
