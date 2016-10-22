@@ -7,7 +7,7 @@
 //
 
 import UIKit
-// import MBProgressHUD
+import MBProgressHUD
 
 class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -22,7 +22,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         // Initialize UISearchBar
         searchBar = UISearchBar()
-        // searchBar.delegate = self
+        searchBar.delegate = self
         
         // Add SearchBar to the NavigationBar
         searchBar.sizeToFit()
@@ -58,17 +58,21 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     // Perform the search.
     fileprivate func doSearch() {
         
-        // MBProgressHUD.showAdded(to: self.view, animated: true)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         
+        print("Term: \(searchSettings.searchString)")
         Business.searchWithTerm(term: searchSettings.searchString! as String, completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.businesses = businesses
+            
+            // DEBUG
             if let businesses = businesses {
                 for business in businesses {
-                    print(business.name!)
-                    print(business.address!)
+                    print("\(business.name!) [\(business.categories!)]")
                 }
             }
+            
+            MBProgressHUD.hide(for: self.view, animated: false)
             self.tableView.reloadData()
             
             
@@ -127,6 +131,7 @@ extension BusinessesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchSettings.searchString = searchBar.text
         searchBar.resignFirstResponder()
+        print("Search buttong clicked")
         doSearch()
     }
 }
