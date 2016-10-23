@@ -94,8 +94,13 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         print("BVC: OfferingDeals: \(offeringDeals!)")
         
         let categories = filters["categories"] as? [String]
+        var distance = filters["distance"] as? Int
         
-        Business.searchWithTerm(term: searchSettings.searchString!, sort: nil, categories: categories, deals: offeringDeals) { (businesses:[Business]?, error: Error?) -> Void in
+        if distance == 0 {
+            distance = nil  // "auto" has tag 0. Tag is where we are getting distance from
+        }
+        
+        Business.searchWithTerm(term: searchSettings.searchString!, sort: nil, categories: categories, deals: offeringDeals, distance: distance) { (businesses:[Business]?, error: Error?) -> Void in
             self.businesses = businesses
             self.tableView.reloadData()
         }

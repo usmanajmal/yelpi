@@ -16,6 +16,7 @@ import UIKit
 class FiltersTableViewController: UITableViewController {
 
     weak var delegate: FiltersTableViewControllerDelegate?
+    var filter = [String: AnyObject]()
     
     @IBOutlet weak var offerringDealsSwitch: UISwitch!
     
@@ -43,7 +44,17 @@ class FiltersTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        
+        // print("Section: \(section)")
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 5
+        default:
+            return 1
+        }
+    
     }
 
     @IBAction func cancelBtnTapped(_ sender: AnyObject) {
@@ -56,11 +67,28 @@ class FiltersTableViewController: UITableViewController {
         dismiss(animated: true, completion: nil)
         
         // Set Offering Deals option
-        var filter = [String: AnyObject]()
+        
         filter["offeringDeals"] = offerringDealsSwitch.isOn as AnyObject
         
         
         delegate?.filtersTableViewController?(filtersTableViewController: self, didUpdateFilters: filter)
+    }
+  
+    @IBOutlet var distanceOutletCollection: [UISwitch]!
+    
+    
+    @IBAction func resetSwitch(_ sender: UISwitch, forEvent event: UIEvent) {
+        
+        for uiSwitch in distanceOutletCollection {
+            if sender != uiSwitch {
+                uiSwitch.setOn(false, animated: true)
+            }
+        }
+        
+        // Set distance in filters dictionary
+        // Get distance (in miles) from tags of each UISwitch
+        filter["distance"] = sender.tag as AnyObject?
+
     }
     
     /*
