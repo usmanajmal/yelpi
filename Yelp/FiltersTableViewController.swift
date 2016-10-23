@@ -8,9 +8,16 @@
 
 import UIKit
 
+@objc protocol FiltersTableViewControllerDelegate {
+    // func doSomethingWithData(data: Data)
+    @objc optional func filtersTableViewController(filtersTableViewController: FiltersTableViewController, didUpdateFilters filters: [String:AnyObject])
+}
+
 class FiltersTableViewController: UITableViewController {
 
-    @IBOutlet var filtersTableView: UITableView!
+    weak var delegate: FiltersTableViewControllerDelegate?
+    
+    @IBOutlet weak var offerringDealsSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +52,15 @@ class FiltersTableViewController: UITableViewController {
     }
     
     @IBAction func searchBtnTapped(_ sender: AnyObject) {
-        print("Searching...")
+        // Dismiss the modal
         dismiss(animated: true, completion: nil)
+        
+        // Set Offering Deals option
+        var filter = [String: AnyObject]()
+        filter["offeringDeals"] = offerringDealsSwitch.isOn as AnyObject
+        
+        
+        delegate?.filtersTableViewController?(filtersTableViewController: self, didUpdateFilters: filter)
     }
     
     /*
