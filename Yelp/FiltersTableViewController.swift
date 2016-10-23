@@ -39,7 +39,7 @@ class FiltersTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,12 +47,10 @@ class FiltersTableViewController: UITableViewController {
         
         // print("Section: \(section)")
         switch section {
-        case 0:
-            return 1
-        case 1:
-            return 5
-        default:
-            return 1
+            case 1:
+                return 5
+            default:
+                return 1
         }
     
     }
@@ -87,8 +85,52 @@ class FiltersTableViewController: UITableViewController {
         
         // Set distance in filters dictionary
         // Get distance (in miles) from tags of each UISwitch
+        
+        // "auto" has tag 0. Tag is where we are getting distance from
+        if (sender.tag == 0) {
+            filter["distance"] = nil
+            return
+        }
+        
         filter["distance"] = sender.tag as AnyObject?
 
+    }
+    @IBAction func setSortMode(_ sender: UISegmentedControl) {
+        
+        /*enum PaperSize: String {
+            case A4, A5, Letter, Legal
+        }
+        
+        let selectedSize = PaperSize.Letter
+        print(selectedSize.rawValue)
+        // Prints "Letter"
+        
+        print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
+        // Prints "true"*/
+        
+        let sortMode:YelpSortMode?
+        
+        switch(sender.selectedSegmentIndex) {
+            case 1:
+                sortMode = YelpSortMode.bestMatched
+            case 2:
+                sortMode = YelpSortMode.distance
+            case 3:
+                sortMode = YelpSortMode.highestRated
+            default:
+                sortMode = nil
+        }
+        
+        // Set the sort filter according to selected option by user
+        print(sortMode)
+        
+        // Selecting "None" will make the sortMode nil
+        if (sortMode == nil) {
+            filter["sort"] = nil
+            return
+        }
+        
+        filter["sort"] = sortMode as AnyObject?
     }
     
     /*

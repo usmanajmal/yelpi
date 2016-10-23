@@ -91,16 +91,14 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     func filtersTableViewController(filtersTableViewController: FiltersTableViewController, didUpdateFilters filters: [String : AnyObject]) {
         
         let offeringDeals = filters["offeringDeals"] as? Bool
+        let sortMode = filters["sort"] as? YelpSortMode
         print("BVC: OfferingDeals: \(offeringDeals!)")
+        print("BVC: Sort: \(sortMode?.rawValue)")
         
         let categories = filters["categories"] as? [String]
-        var distance = filters["distance"] as? Int
+        let distance = filters["distance"] as? Int
         
-        if distance == 0 {
-            distance = nil  // "auto" has tag 0. Tag is where we are getting distance from
-        }
-        
-        Business.searchWithTerm(term: searchSettings.searchString!, sort: nil, categories: categories, deals: offeringDeals, distance: distance) { (businesses:[Business]?, error: Error?) -> Void in
+        Business.searchWithTerm(term: searchSettings.searchString!, sort: sortMode, categories: categories, deals: offeringDeals, distance: distance) { (businesses:[Business]?, error: Error?) -> Void in
             self.businesses = businesses
             self.tableView.reloadData()
         }
