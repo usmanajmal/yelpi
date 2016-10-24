@@ -50,6 +50,10 @@ Here's a walkthrough of implemented user stories:
 
 <img src='https://github.com/usmanajmal/yelpi/blob/master/yelpi.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
+**Optional: Infinite Scroll**
+<img src='
+https://github.com/usmanajmal/yelpi/blob/master/yelpi-infinite-scroll.gif' title='Infinite Scroll' width='' alt='Video Walkthrough' />
+
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
