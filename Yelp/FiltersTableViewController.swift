@@ -17,10 +17,10 @@ class FiltersTableViewController: UITableViewController {
 
     weak var delegate: FiltersTableViewControllerDelegate?
     var filter = [String: AnyObject]()
+    // TODO: Get number section from proper datastructre like
+    // a dictionaory which has all sections, their titles, number
+    // of rows etc.
     let NUMBER_OF_SECTIONS = 4
-    
-    let categories = ["afghani", "african", "newamerican", "tradamerican"]
-    var categoriesChosen = Set<String>()
     
     @IBOutlet var distanceOutletCollection: [UISwitch]!
     @IBOutlet weak var offerringDealsSwitch: UISwitch!
@@ -30,11 +30,6 @@ class FiltersTableViewController: UITableViewController {
         super.viewDidLoad()
 
         segmentedControl.apportionsSegmentWidthsByContent = true
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +46,8 @@ class FiltersTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
+        // TODO:
+        // Use a dictionaory which has all sections, their titles, number of rows etc.
         switch section {
             // Distance Section has 5 rows
             case 1:
@@ -65,23 +62,33 @@ class FiltersTableViewController: UITableViewController {
     
     }
 
+    /**
+     *  Action for cancel button. Dismiss the modal when cancel is 
+     *  pressed
+     */
     @IBAction func cancelBtnTapped(_ sender: AnyObject) {
         print("Cancelling...")
         dismiss(animated: true, completion: nil)
     }
     
+    /**
+     *  Search using updated "filter" dictionary
+     */
     @IBAction func searchBtnTapped(_ sender: AnyObject) {
         // Dismiss the modal
         dismiss(animated: true, completion: nil)
         
         // Set Offering Deals option
-        
         filter["offeringDeals"] = offerringDealsSwitch.isOn as AnyObject
-        
         
         delegate?.filtersTableViewController?(filtersTableViewController: self, didUpdateFilters: filter)
     }
     
+    /**
+     *  Action outlet for all distance UISwitch
+     *  Turn Off all other switch when an of those distance switches
+     *  is turned On by user
+     */
     @IBAction func resetSwitch(_ sender: UISwitch, forEvent event: UIEvent) {
         
         for uiSwitch in distanceOutletCollection {
@@ -102,6 +109,10 @@ class FiltersTableViewController: UITableViewController {
         filter["distance"] = sender.tag as AnyObject?
 
     }
+    
+    /**
+     *  Action outlet for setting Sort mode in "filter"
+     */
     @IBAction func setSortMode(_ sender: UISegmentedControl) {
         let sortMode:YelpSortMode?
         
@@ -126,8 +137,19 @@ class FiltersTableViewController: UITableViewController {
         filter["sort"] = sortMode as AnyObject?
     }
     
-    
+    /**
+     *  Action outlet for setting Category in "filter"
+     *
+     */
     @IBAction func setCategory(_ sender: UISwitch) {
+        // **********************************************************
+        // NOTE: Only 4 Categories added as requested in README.md  *
+        // Didn't go for implementation of what Tim showed in video *
+        // in favor of other items but will take care of it if found*
+        // time.                                                    *
+        // **********************************************************
+        let categories = ["afghani", "african", "newamerican", "tradamerican"]
+        var categoriesChosen = Set<String>()
         
         if sender.isOn {
             categoriesChosen.insert(categories[sender.tag])
@@ -140,60 +162,5 @@ class FiltersTableViewController: UITableViewController {
         
         filter["categories"] = categoriesArray as AnyObject?
     }
-    
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
