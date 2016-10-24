@@ -62,13 +62,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         Business.searchWithTerm(term: searchSettings.searchString! as String, completion: { (businesses: [Business]?, error: Error?) -> Void in
             self.businesses = businesses
             
-            // DEBUG
-            /*if let businesses = businesses {
-             for business in businesses {
-             print("\(business.name!) [\(business.categories!)]")
-             }
-             }*/
-            
             MBProgressHUD.hide(for: self.view, animated: false)
             self.tableView.reloadData()
             
@@ -92,14 +85,15 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         let offeringDeals = filters["offeringDeals"] as? Bool
         let sortMode = filters["sort"] as? YelpSortMode
-        print("BVC: OfferingDeals: \(offeringDeals!)")
-        print("BVC: Sort: \(sortMode?.rawValue)")
-        
         let categories = filters["categories"] as? [String]
         let distance = filters["distance"] as? Int
         
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         Business.searchWithTerm(term: searchSettings.searchString!, sort: sortMode, categories: categories, deals: offeringDeals, distance: distance) { (businesses:[Business]?, error: Error?) -> Void in
             self.businesses = businesses
+            
+            MBProgressHUD.hide(for: self.view, animated: false)
             self.tableView.reloadData()
         }
     }

@@ -17,12 +17,19 @@ class FiltersTableViewController: UITableViewController {
 
     weak var delegate: FiltersTableViewControllerDelegate?
     var filter = [String: AnyObject]()
+    let NUMBER_OF_SECTIONS = 4
     
+    let categories = ["afghani", "african", "newamerican", "tradamerican"]
+    var categoriesChosen = Set<String>()
+    
+    @IBOutlet var distanceOutletCollection: [UISwitch]!
     @IBOutlet weak var offerringDealsSwitch: UISwitch!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        segmentedControl.apportionsSegmentWidthsByContent = true
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -39,16 +46,22 @@ class FiltersTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return NUMBER_OF_SECTIONS
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         // print("Section: \(section)")
+        
         switch section {
+            // Distance Section has 5 rows
             case 1:
                 return 5
+            // Categories Section has 4 rows
+            case 3:
+                return 4
+            // Rest of the sections have 1 row
             default:
                 return 1
         }
@@ -71,9 +84,6 @@ class FiltersTableViewController: UITableViewController {
         
         delegate?.filtersTableViewController?(filtersTableViewController: self, didUpdateFilters: filter)
     }
-  
-    @IBOutlet var distanceOutletCollection: [UISwitch]!
-    
     
     @IBAction func resetSwitch(_ sender: UISwitch, forEvent event: UIEvent) {
         
@@ -96,18 +106,6 @@ class FiltersTableViewController: UITableViewController {
 
     }
     @IBAction func setSortMode(_ sender: UISegmentedControl) {
-        
-        /*enum PaperSize: String {
-            case A4, A5, Letter, Legal
-        }
-        
-        let selectedSize = PaperSize.Letter
-        print(selectedSize.rawValue)
-        // Prints "Letter"
-        
-        print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
-        // Prints "true"*/
-        
         let sortMode:YelpSortMode?
         
         switch(sender.selectedSegmentIndex) {
@@ -131,6 +129,22 @@ class FiltersTableViewController: UITableViewController {
         }
         
         filter["sort"] = sortMode as AnyObject?
+    }
+    
+    
+    @IBAction func setCategory(_ sender: UISwitch) {
+        
+        if sender.isOn {
+            categoriesChosen.insert(categories[sender.tag])
+        }
+        else {
+            categoriesChosen.remove(categories[sender.tag])
+        }
+        
+        let categoriesArray = Array(categoriesChosen) as [String]
+        // print(categoriesArray)
+        
+        filter["categories"] = categoriesArray as AnyObject?
     }
     
     /*
