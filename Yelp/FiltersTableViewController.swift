@@ -50,10 +50,7 @@ class FiltersTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        
-        // print("Section: \(section)")
-        
+
         switch section {
             // Distance Section has 5 rows
             case 1:
@@ -120,8 +117,6 @@ class FiltersTableViewController: UITableViewController {
         }
         
         // Set the sort filter according to selected option by user
-        print(sortMode)
-        
         // Selecting "None" will make the sortMode nil
         if (sortMode == nil) {
             filter["sort"] = nil
@@ -142,7 +137,6 @@ class FiltersTableViewController: UITableViewController {
         }
         
         let categoriesArray = Array(categoriesChosen) as [String]
-        // print(categoriesArray)
         
         filter["categories"] = categoriesArray as AnyObject?
     }

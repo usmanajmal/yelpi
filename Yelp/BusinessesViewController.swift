@@ -55,11 +55,23 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         return businesses.count
     }
     
+    func sanitizeString(str: String) -> String {
+        let newString: String = str.replacingOccurrences(of: " ", with: "")
+        
+        if (newString == "" || newString == "nil") {
+            return ""
+        }
+        return str
+    }
+    
     // Perform the search.
     fileprivate func doSearch() {
         MBProgressHUD.showAdded(to: self.view, animated: true)
         
-        Business.searchWithTerm(term: searchSettings.searchString! as String, completion: { (businesses: [Business]?, error: Error?) -> Void in
+        
+        let term = sanitizeString(str: searchSettings.searchString! as String)
+        
+        Business.searchWithTerm(term: term, completion: { (businesses: [Business]?, error: Error?) -> Void in
             self.businesses = businesses
             
             MBProgressHUD.hide(for: self.view, animated: false)
@@ -121,7 +133,6 @@ extension BusinessesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchSettings.searchString = searchBar.text
         searchBar.resignFirstResponder()
-        print("Search buttong clicked")
         doSearch()
     }
 }
