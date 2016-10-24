@@ -48,9 +48,11 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
+1. First GIF has all mandatory items
+2. Second GIF has infinite scroll
+
 <img src='https://github.com/usmanajmal/yelpi/blob/master/yelpi.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-**Optional: Infinite Scroll**
 <img src='https://github.com/usmanajmal/yelpi/blob/master/yelpi-infinite-scroll.gif' title='Infinite Scroll' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
